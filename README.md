@@ -1,5 +1,6 @@
 
-Business Dashboard: Next.js & Go Full-Stack Application
+# Business Dashboard: Next.js & Go Full-Stack Application
+
 This enterprise resource management dashboard combines the power of Next.js for frontend development with Go's robust backend capabilities. The application provides businesses with a comprehensive solution for managing resources, tracking inventory, and monitoring key performance indicators in real-time.
 Technical Overview:
 Frontend leverages Next.js 14 with TypeScript, incorporating modern development practices through shadcn/ui components and Tailwind CSS for styling. The backend utilizes Go with Gin framework and GORM for efficient database operations, ensuring high performance and scalability.
@@ -16,7 +17,7 @@ Enterprise-grade security measures
 Technology Stack:
 Frontend:
 
-Next.js 14 with TypeScript
+Next.js 15 with TypeScript
 shadcn/ui for component architecture
 Tailwind CSS for styling
 pnpm for package management
