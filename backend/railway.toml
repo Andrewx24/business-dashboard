@@ -1,0 +1,10 @@
+
+[build]
+builder = "go"
+buildCommand = "go build -o main ./cmd/main.go"
+startCommand = "./main"
+
+[deploy]
+startCommand = "./main"
+healthcheckPath = "/api/health"
+restartPolicyType = "on-failure"

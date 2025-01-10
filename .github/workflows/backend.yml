@@ -1,0 +1,14 @@
+# .github/workflows/backend.yml
+name: Backend CI/CD
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: railway/cli-action@v1

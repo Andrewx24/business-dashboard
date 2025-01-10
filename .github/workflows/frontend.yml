@@ -1,0 +1,14 @@
+# .github/workflows/frontend.yml
+name: Frontend CI/CD
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: vercel/actions/deploy@v1
