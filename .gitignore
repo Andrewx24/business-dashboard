@@ -1,0 +1,31 @@
+# Dependencies
+node_modules
+.pnpm-store
+.next
+build
+dist
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/vendor/
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# System specific
+.DS_Store
+Thumbs.db
