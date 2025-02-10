@@ -1,101 +1,93 @@
-import Image from "next/image";
+// src/app/page.tsx
+import Image from 'next/image';
+import Link from 'next/link';
+import { DashboardHeader } from '@/components/dashboard/header';
+import { DashboardNav } from '@/components/dashboard/nav';
+import { Overview } from '@/components/dashboard/overview';
+import { RecentActivity } from '@/components/dashboard/recent-activity';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+// Using TypeScript for better type safety and developer experience
+interface DashboardMetric {
+  label: string;
+  value: string;
+  trend: number;
+  icon: React.ReactNode;
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  // Quick metrics shown at the top of the dashboard
+  const metrics: DashboardMetric[] = [
+    {
+      label: 'Total Revenue',
+      value: '$45,231.89',
+      trend: 20.1,
+      icon: '💰'
+    },
+    {
+      label: 'Active Users',
+      value: '2,345',
+      trend: 15.3,
+      icon: '👥'
+    },
+    {
+      label: 'Pending Orders',
+      value: '12',
+      trend: -2.5,
+      icon: '📦'
+    }
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  return (
+    <div className="flex min-h-screen flex-col">
+      <DashboardHeader />
+      
+      <div className="flex flex-1">
+        <DashboardNav />
+        
+        <main className="flex-1 p-6">
+          <div className="flex flex-col space-y-6">
+            {/* Welcome Section */}
+            <div className="flex items-center justify-between">
+              <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+              <div className="flex items-center space-x-4">
+                <Link 
+                  href="/reports"
+                  className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                >
+                  Generate Report
+                </Link>
+              </div>
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {metrics.map((metric) => (
+                <Card key={metric.label}>
+                  <CardHeader className="flex flex-row items-center justify-between pb-2">
+                    <CardTitle className="text-sm font-medium">
+                      {metric.label}
+                    </CardTitle>
+                    <span className="text-2xl">{metric.icon}</span>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{metric.value}</div>
+                    <p className={`text-sm ${metric.trend > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {metric.trend > 0 ? '+' : ''}{metric.trend}% from last month
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Main Content Area */}
+            <div className="grid gap-6 lg:grid-cols-2">
+              <Overview />
+              <RecentActivity />
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
